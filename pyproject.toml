@@ -1,10 +1,12 @@
-[project]
+[tool.poetry]
 name = "project-chimera"
 version = "0.1.0"
 description = "Autonomous Influencer Network – Spec-Driven Architecture"
-requires-python = ">=3.11"
+authors = ["Alemu <you@example.com>"]
+package-mode = false
 
-[project.dependencies]
+[tool.poetry.dependencies]
+python = ">=3.11,<4.0"
 pytest = ">=8.0.0"
 
 [build-system]
