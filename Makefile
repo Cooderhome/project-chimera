@@ -1,5 +1,5 @@
 setup:
-	poetry install
+	poetry install --no-root
 
 test:
 	pytest tests/
