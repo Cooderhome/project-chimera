@@ -2,7 +2,7 @@ setup:
 	poetry install --no-root
 
 test:
-	pytest tests/
+	poetry run pytest tests/
 
 spec-check:
 	@echo "Spec check not yet implemented."
