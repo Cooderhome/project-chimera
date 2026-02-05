@@ -1,0 +1,44 @@
+---
+alwaysApply: true
+---
+
+This is Project Chimera, an autonomous influencer system built as an **Agent Swarm** using the FastRender Planner–Worker–Judge pattern and the Model Context Protocol (MCP) for all external interactions.
+
+Prime directives for this workspace:
+
+1. **Specs first, always**
+   - NEVER generate or modify implementation code without first checking:
+     - `project_chimera_challange.md` (challenge framing and rubric)
+     - `project_chimera_srs.md` (authoritative requirements)
+     - `specs/_meta.md`, `specs/functional.md`, `specs/technical.md`, `specs/openclaw_integration.md`.
+   - If something is unclear or missing, update the specs before inventing behavior in code.
+
+2. **Explain the plan before coding**
+   - Before making non-trivial edits, briefly state:
+     - Which spec sections / FR / NFR you are implementing or modifying.
+     - Which files you will touch and why.
+   - Keep a clear mapping from requirement → tests → implementation.
+
+3. **Traceability & TDD**
+   - Treat tests in `tests/` as the first-class expression of intent.
+   - It is acceptable for tests to fail temporarily if they represent future behavior, but do not "fix" failing tests by weakening assertions without updating the corresponding specs.
+   - Reference SRS IDs (e.g. `FR 2.2`, `NFR 1.0`) in comments/docstrings when implementing related logic.
+
+4. **Skills vs MCP servers**
+   - Runtime capabilities for the Chimera agent belong under `skills/` (e.g. fetching trends, generating captions, publishing video).
+   - Development-time and infrastructure capabilities should be accessed via MCP servers configured in `.cursor/mcp.json` (e.g. Tenx MCP Sense, filesystem, git, SQL).
+   - Do not hard-wire third-party APIs directly into core logic; wrap them as skills or MCP servers with clear input/output contracts.
+
+5. **Safety, governance, and HITL**
+   - For any action that publishes content, moves money, or changes external state, assume there MUST be a Judge/HITL layer in the final design.
+   - When proposing or generating such code, include:
+     - A clear hook for a Judge/HITL decision.
+     - Confidence scoring and escalation pathways, as described in the SRS.
+
+6. **No vibe coding**
+   - Avoid large, speculative implementations that are not grounded in the specs.
+   - Prefer small, composable changes that clearly map back to written intent.
+
+7. **MCP telemetry**
+   - Assume Tenx MCP Sense is the black-box recorder for this project.
+   - Avoid disabling or bypassing MCP telemetry; structure commands and workflows so they can be observed and replayed.

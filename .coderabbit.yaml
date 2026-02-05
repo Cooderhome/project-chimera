@@ -1,0 +1,79 @@
+version: 1
+
+project:
+  name: "Project Chimera"
+  description: >
+    Autonomous Influencer Network using MCP and FastRender swarm.
+    Reviewers must enforce strict alignment with specs/, SRS, and governance rules.
+
+review_rules:
+  - id: spec-alignment
+    title: "Spec Alignment"
+    description: >
+      All new or changed code must be traceable to an explicit requirement
+      in specs/ (*.md) or project_chimera_srs.md. If a change is not
+      justified by a spec, request clarification or an update to the specs.
+    severity: high
+
+  - id: tests-and-tdd
+    title: "TDD & Tests"
+    description: >
+      Ensure that tests in tests/ reflect the API contracts defined in
+      specs/technical.md and specs/functional.md. Failing tests that define
+      future behavior are allowed, but reviewers should flag any implementation
+      that silently changes test intent without updating specs.
+    severity: high
+
+  - id: mcp-boundary
+    title: "MCP Boundary & Integrations"
+    description: >
+      Verify that external integrations (APIs, databases, social platforms)
+      are accessed via MCP servers or skills abstractions, not ad-hoc code
+      scattered across the codebase. New integrations should be added as
+      MCP servers or skills with clear contracts under skills/.
+    severity: medium
+
+  - id: security-and-secrets
+    title: "Security & Secrets"
+    description: >
+      Ensure no secrets, API keys, or private keys are hard-coded or logged.
+      Any use of AgentKit, wallets, or external services must read credentials
+      from environment variables or a secure secret manager, as described in
+      the SRS. Reviewers should block any code that risks key leakage.
+    severity: critical
+
+  - id: governance-and-hitl
+    title: "Governance & HITL"
+    description: >
+      Changes that affect publishing, financial actions, or safety-critical
+      behavior must respect the Planner-Worker-Judge pattern and Human-in-the-Loop
+      (HITL) requirements from the SRS. Reviewers should flag any direct
+      "fire-and-forget" actions that bypass Judges or HITL checks.
+    severity: high
+
+  - id: readability-and-traceability
+    title: "Readability & Traceability"
+    description: >
+      Code should be organized so that agents and humans can trace behavior
+      from tests -> implementation -> specs. Prefer small, composable modules,
+      clear docstrings linking back to specific FR/NFR IDs in the SRS, and
+      minimal "vibe coding" without references.
+    severity: medium
+
+ai_reviewer:
+  enabled: true
+  max_comments: 50
+  summarize_findings: true
+
+paths:
+  include:
+    - "specs/**"
+    - "skills/**"
+    - "tests/**"
+    - "planner/**"
+    - "worker/**"
+    - "judge/**"
+    - "Dockerfile"
+    - "Makefile"
+    - "project_chimera_srs.md"
+    - "project_chimera_challange.md"

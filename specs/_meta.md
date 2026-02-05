@@ -6,8 +6,7 @@ Project Chimera is an autonomous AI influencer system designed to:
 - generate platform-appropriate content,
 - and publish media without human intervention at runtime.
 
-The system is built to be operated and extended by autonomous AI agents,
-not manual developers.
+The system is built to be operated and extended by autonomous AI agents, managed by a centralized Orchestrator and Swarm Architecture for scalable, parallel execution. Self-healing workflows and agentic commerce (crypto wallet integration) are core features.
 
 ## Non-Goals
 Project Chimera is NOT:
@@ -19,6 +18,9 @@ Project Chimera is NOT:
 - Spec-Driven Development (SDD): Specifications are the source of truth.
 - Test-Governed Execution: Tests define acceptable behavior.
 - Agent-Safe Design: The system must be safe for multi-agent collaboration.
+- Centralized Orchestrator and Swarm Architecture for agent management.
+- Self-healing workflows for operational resilience.
+- Agentic commerce for autonomous transactions.
 
 ## Hard Constraints
 - No implementation code may be written without an approved spec.
